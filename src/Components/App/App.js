@@ -18,6 +18,8 @@ class App extends React.Component {
       playlistTracks: [],
 
       placeHolder: "New Playlist",
+
+      submit: false
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -29,6 +31,8 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
 
     this.search = this.search.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   addTrack(track) {
@@ -66,18 +70,23 @@ class App extends React.Component {
         alert("Playlist is empty!");
         return
       } else {
-        alert("Playlist saved successfully!");
-
         this.setState({
           playlistName: "",
-          playlistTracks: []
-      })
-    }
-  })
-    // Spotify.savePlaylist(this.state.playlistName, trackURIs)
-    // this.setState({playlistName: "and another one",
-                    //  playlistTracks: []});
-};
+          playlistTracks: [],
+          submit: true
+        })
+
+        setTimeout(this.handleSubmit, 2000)
+
+      }
+    })
+  };
+
+  handleSubmit() {
+    this.setState({
+      submit: false
+    })
+  }
 
   search(term) {
     Spotify.search(term).then(searchResults => {
@@ -91,7 +100,6 @@ class App extends React.Component {
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          {/* <ErrorModal errorMessage={""}/> */}
           <SearchBar onSearch={this.search}/>
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults}
@@ -101,7 +109,8 @@ class App extends React.Component {
                       onRemove={this.removeTrack}
                       onNameChange={this.updatePlaylistname}
                       onSave={this.savePlaylist}
-                      placeHolder={this.state.placeHolder}/>
+                      placeHolder={this.state.placeHolder}
+                      submit={this.state.submit}/>
           </div>
         </div>
       </div>
