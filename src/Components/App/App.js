@@ -75,6 +75,7 @@ class App extends React.Component {
           playlistTracks: [],
           submit: true
         })
+        console.log("state after setState", this.state.submit)
 
         setTimeout(this.handleSubmit, 2000)
 
@@ -83,6 +84,7 @@ class App extends React.Component {
   };
 
   handleSubmit() {
+    console.log("handleSubmit state", this.state.submit)
     this.setState({
       submit: false
     })
