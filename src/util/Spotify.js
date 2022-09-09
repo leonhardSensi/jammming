@@ -1,5 +1,5 @@
 const clientID = "3697fc9376ac46d3aadda4301036d7a1";
-const redirectURI = "http://noisy.surge.sh";
+const redirectURI = `${window.location.protocol}//${window.location.host}`;
 // const redirectURI = "http://localhost:3000"
 
 let accessToken;
